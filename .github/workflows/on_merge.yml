@@ -7,4 +7,4 @@ jobs:
   container:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/actions/container
+      - uses: ./.github/actions/container.yml
