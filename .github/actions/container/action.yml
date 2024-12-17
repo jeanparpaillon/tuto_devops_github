@@ -1,5 +1,9 @@
 name: container
 description: Build and push the container image
+inputs:
+  github_token:
+    description: 'The GitHub token to use'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -9,7 +13,7 @@ runs:
       with:
         registry: https://ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ inputs.github_token }}
     - uses: docker/build-push-action@v2
       with:
         context: .
