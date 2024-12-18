@@ -1,8 +1,12 @@
 name: container
 description: Build and push the container image
 inputs:
-  github_token:
-    description: 'The GitHub token to use'
+  docker_repo:
+    required: true
+  docker_user:
+    required: true
+  docker_token:
+    description: 'The Docker token to use'
     required: true
 runs:
   using: "composite"
@@ -11,11 +15,11 @@ runs:
     - name: Log in to the Container registry
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
-        registry: https://ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ inputs.github_token }}
+        registry: https://${{ inputs.docker_repo }}
+        username: ${{ inputs.docker_user }}
+        password: ${{ inputs.docker_token }}
     - uses: docker/build-push-action@v2
       with:
         context: .
         push: true
-        tags: ghcr.io/${{ github.repository }}:latest, ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+        tags: ${{ inputs.docker_repo }}/${{ github.repository }}:latest, ${{ inputs.docker_repo }}/${{ github.repository }}:${{ github.ref_name }}
