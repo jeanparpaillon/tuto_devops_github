@@ -10,4 +10,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/container
         with:
-          github_token: ${{ secrets.JFROG_DOCKER_TOKEN }}
+          docker_repo: trialk033s3.jfrog.io/docker-trial
+          docker_user: jean@parpaillon.info
+          docker_token: ${{ secrets.JFROG_DOCKER_TOKEN }}
